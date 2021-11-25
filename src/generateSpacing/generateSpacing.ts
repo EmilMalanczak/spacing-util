@@ -1,6 +1,6 @@
-import { Spacing, SpacingParser, SpacingValue } from '../types';
+import { GenerateSpacing, SpacingValue } from '../types';
 
-export const generateSpacing = (parser: SpacingParser): Spacing => {
+export const generateSpacing: GenerateSpacing = parser => {
   const cache = new Map<SpacingValue, string>();
 
   const transform = (value: SpacingValue): SpacingValue => {
@@ -9,7 +9,7 @@ export const generateSpacing = (parser: SpacingParser): Spacing => {
     if (isCustomProperty) return value;
 
     // check if that value was already calculated
-    // reduction of unnessesary calculations and memory use
+    // reduction of unnecessary calculations and memory use
     const cachedValue = cache.get(value);
 
     if (cachedValue) {

@@ -1,0 +1,1 @@
+export { generateBoxProperty } from './generateBoxProperty';
