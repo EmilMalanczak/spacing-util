@@ -1,0 +1,1 @@
+export { generateSpacing } from './generateSpacing';
