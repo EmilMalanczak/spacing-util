@@ -1,1 +1,1 @@
-export { generateBoxProperty } from './generateBoxProperty';
+export * from './generateBoxProperty';

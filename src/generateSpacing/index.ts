@@ -1,1 +1,1 @@
-export { generateSpacing } from './generateSpacing';
+export * from './generateSpacing';

@@ -1,4 +1,4 @@
-import { defaultSpacing as spacing } from './spacing';
+import { spacing } from './spacing';
 
 describe('default spacing', () => {
   test('single argument is multiplied correctly', () => {

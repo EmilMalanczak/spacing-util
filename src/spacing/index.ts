@@ -1,1 +1,1 @@
-export { defaultSpacing as spacing } from './spacing';
+export * from './spacing';
