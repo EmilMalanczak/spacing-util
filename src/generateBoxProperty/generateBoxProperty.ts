@@ -1,3 +1,4 @@
+import { SpacingValue } from '..';
 import type { BoxProperty, Direction, GenerateBoxProperty } from '../types';
 
 const DIRECTION_ALIAS = {
@@ -17,7 +18,7 @@ const formatProperty = (
         `;
   }
 
-  return ` 
+  return `  
     ${property}-${direction}: ${value}; 
   `;
 };
@@ -39,7 +40,7 @@ export const generateBoxProperty: GenerateBoxProperty =
           ${formatProperty(
             property,
             direction as Direction,
-            spacing(propertyValue)
+            spacing(propertyValue as SpacingValue)
           )}
         `,
       ''

@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const minifyCss = (arg: any): string => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   const css: string = typeof arg === 'string' ? arg : arg[0];

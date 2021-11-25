@@ -21,7 +21,7 @@ assignees: ''
 ## Are you willing to resolve this issue by submitting a Pull Request?
 
 <!--
-  Remember that first-time contributors are welcome! 🙌
+  Remember that contributors are welcome! 🙌
 -->
 
 - [ ] Yes, I have the time, and I know how to start.
