@@ -4,6 +4,7 @@ module.exports = {
   testMatch: ['**/*.test.ts'],
   collectCoverageFrom: [
     '<rootDir>/src/**/*.ts',
+    '!<rootDir>/src/**/index.ts',
     '!<rootDir>/src/types/**/*.ts',
   ],
   globals: {
