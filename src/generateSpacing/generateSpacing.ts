@@ -3,7 +3,7 @@ import { GenerateSpacing, SpacingValue } from '../types';
 export const generateSpacing: GenerateSpacing = parser => {
   const cache = new Map<SpacingValue, string>();
 
-  const transform = (value: SpacingValue): SpacingValue => {
+  const transform = (value: SpacingValue) => {
     const isCustomProperty = typeof value !== 'number';
 
     if (isCustomProperty) return value;

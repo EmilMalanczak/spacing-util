@@ -2,35 +2,32 @@ export type SpacingValue = string | number;
 
 export type SpacingParser = (value: number) => string;
 
-type FixedSizeArray<T, N extends number> = N extends 0
-  ? never[]
-  : {
-      0: T;
-      length: N;
-    } & ReadonlyArray<T>;
+type _TupleOf<T, N extends number, R extends unknown[]> = R['length'] extends N
+  ? R
+  : _TupleOf<T, N, [T, ...R]>;
 
-export type SpacingArgs = [] | FixedSizeArray<SpacingValue, 1 | 2 | 3 | 4>;
+type Tuple<T, N extends number> = N extends N
+  ? number extends N
+    ? T[]
+    : _TupleOf<T, N, []>
+  : never;
+
+export type SpacingArgs = Tuple<SpacingValue, 0 | 1 | 2 | 3 | 4>;
 
 export type Spacing = (...values: SpacingArgs) => string;
 
-type BoxProperty = 'margin' | 'padding';
-
 type NotEmpty<T> = unknown extends T ? never : T;
 
-type AxisProperty = Partial<Record<'x' | 'y', SpacingValue>>;
+export type Direction = 'left' | 'top' | 'right' | 'bottom' | 'x' | 'y';
+type DirectionProperty = Partial<Record<Direction, SpacingValue>>;
 
-type SingleProperty = Partial<
-  Record<'left' | 'top' | 'right' | 'bottom', SpacingValue>
->;
+export type BoxProperty = 'margin' | 'padding';
 
-export type BoxPropertyValue =
-  | NotEmpty<AxisProperty>
-  | NotEmpty<SingleProperty>
-  | SpacingValue;
+export type BoxPropertyValue = NotEmpty<DirectionProperty> | SpacingValue;
 
 export type BoxPropertyTransformer = (
-  value: BoxPropertyValue | SpacingValue,
-  ...rest: SpacingArgs
+  value: BoxPropertyValue,
+  ...rest: Tuple<SpacingValue, 0 | 1 | 2 | 3>
 ) => string;
 
 export type GenerateBoxProperty = (

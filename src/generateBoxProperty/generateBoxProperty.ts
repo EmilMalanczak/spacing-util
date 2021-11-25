@@ -1,38 +1,47 @@
-import type {
-  BoxPropertyTransformer,
-  GenerateBoxProperty,
-  SpacingArgs,
-} from '../types';
+import type { BoxProperty, Direction, GenerateBoxProperty } from '../types';
 
-export const generateBoxProperty: GenerateBoxProperty = property => spacing => {
-  const transform: BoxPropertyTransformer = (value, ...rest) => {
-    if (typeof value === 'number' || typeof value === 'string') {
-      const spacingArgs = [value, ...rest] as SpacingArgs;
-      // TODO: unexpected typing issue - probably bug comes
-      // from FixedArraySize type
+const DIRECTION_ALIAS = {
+  y: ['top', 'bottom'],
+  x: ['left', 'right'],
+};
 
-      return ` 
-          ${property}: ${spacing(...(spacingArgs as any))};  
+const formatProperty = (
+  property: BoxProperty,
+  direction: Direction,
+  value: string
+): string => {
+  if (direction === 'x' || direction === 'y') {
+    return `
+        ${property}-${DIRECTION_ALIAS[direction][0]}: ${value}; 
+        ${property}-${DIRECTION_ALIAS[direction][1]}: ${value}; 
         `;
-    }
+  }
 
-    if ('x' in value || 'y' in value) {
-      const { x, y } = value;
+  return ` 
+    ${property}-${direction}: ${value}; 
+  `;
+};
 
-      return `
-          ${property}: ${spacing(y ?? 0, x ?? 0)};
+export const generateBoxProperty: GenerateBoxProperty =
+  property =>
+  spacing =>
+  (value, ...rest) => {
+    if (typeof value === 'number' || typeof value === 'string') {
+      return `  
+          ${property}: ${spacing(value, ...rest)};     
         `;
     }
 
     return Object.entries(value).reduce(
       (css, [direction, propertyValue]) =>
-        `
+        ` 
           ${css}
-          ${property}-${direction}: ${spacing(propertyValue)}; 
+          ${formatProperty(
+            property,
+            direction as Direction,
+            spacing(propertyValue)
+          )}
         `,
       ''
     );
   };
-
-  return transform;
-};

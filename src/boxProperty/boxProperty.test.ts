@@ -19,26 +19,56 @@ describe('box-property theme util', () => {
   });
 
   test('x, y axis', () => {
-    expect(minifyCss(padding({ x: 3, y: 10 }))).toBe(
+    expect(minifyCss(padding({ y: 10 }))).toContain(
       minifyCss` 
-            padding: 40px 12px;
-        `
+              padding-top: 40px;
+          `
+    );
+
+    expect(minifyCss(padding({ y: 10 }))).toContain(
+      minifyCss` 
+                padding-bottom: 40px;
+            `
+    );
+
+    expect(minifyCss(padding({ x: 3 }))).toContain(
+      minifyCss` 
+              padding-left: 12px;
+          `
+    );
+
+    expect(minifyCss(padding({ x: 3 }))).toContain(
+      minifyCss` 
+              padding-right: 12px;
+          `
     );
   });
 
   test('x axis', () => {
-    expect(minifyCss(padding({ x: 3 }))).toBe(
+    expect(minifyCss(padding({ x: 3 }))).toContain(
       minifyCss` 
-            padding: 0px 12px;
+            padding-left: 12px;
+        `
+    );
+
+    expect(minifyCss(padding({ x: 3 }))).toContain(
+      minifyCss` 
+            padding-right: 12px;
         `
     );
   });
 
   test('y axis', () => {
-    expect(minifyCss(padding({ y: 10 }))).toBe(
+    expect(minifyCss(padding({ y: 10 }))).toContain(
       minifyCss` 
-            padding: 40px 0px;
+            padding-top: 40px;
         `
+    );
+
+    expect(minifyCss(padding({ y: 10 }))).toContain(
+      minifyCss` 
+              padding-bottom: 40px;
+          `
     );
   });
 
