@@ -1,59 +1,4 @@
-# typescript-npm-package-template
-
-> Template to kickstart creating a Node.js module using TypeScript and VSCode
-
-Inspired by [node-module-boilerplate](https://github.com/sindresorhus/node-module-boilerplate)
-
-## Features
-
-- [Semantic Release](https://github.com/semantic-release/semantic-release)
-- [Issue Templates](https://github.com/ryansonshine/typescript-npm-package-template/tree/main/.github/ISSUE_TEMPLATE)
-- [GitHub Actions](https://github.com/ryansonshine/typescript-npm-package-template/tree/main/.github/workflows)
-- [Codecov](https://about.codecov.io/)
-- [VSCode Launch Configurations](https://github.com/ryansonshine/typescript-npm-package-template/blob/main/.vscode/launch.json)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Husky](https://github.com/typicode/husky)
-- [Lint Staged](https://github.com/okonet/lint-staged)
-- [Commitizen](https://github.com/search?q=commitizen)
-- [Jest](https://jestjs.io/)
-- [ESLint](https://eslint.org/)
-- [Prettier](https://prettier.io/)
-
-## Getting started
-
-### Set up your repository
-
-**Click the "Use this template" button.**
-
-Alternatively, create a new directory and then run:
-
-```bash
-curl -fsSL https://github.com/ryansonshine/typescript-npm-package-template/archive/main.tar.gz | tar -xz --strip-components=1
-```
-
-Replace `FULL_NAME`, `GITHUB_USER`, and `REPO_NAME` in the script below with your own details to personalize your new package:
-
-```bash
-FULL_NAME="John Smith"
-GITHUB_USER="johnsmith"
-REPO_NAME="my-cool-package"
-sed -i.mybak "s/ryansonshine/$GITHUB_USER/g; s/typescript-npm-package-template\|my-package-name/$REPO_NAME/g; s/Ryan Sonshine/$FULL_NAME/g" package.json package-lock.json README.md
-rm *.mybak
-```
-
-### Add NPM Token
-
-Add your npm token to your GitHub repository secrets as `NPM_TOKEN`.
-
-### Add Codecov integration
-
-Enable the Codecov GitHub App [here](https://github.com/apps/codecov).
-
-**Remove everything from here and above**
-
----
-
-# my-package-name
+# spacing-util
 
 [![npm package][npm-img]][npm-url]
 [![Build Status][build-img]][build-url]
@@ -63,55 +8,131 @@ Enable the Codecov GitHub App [here](https://github.com/apps/codecov).
 [![Commitizen Friendly][commitizen-img]][commitizen-url]
 [![Semantic Release][semantic-release-img]][semantic-release-url]
 
-> My awesome module
+A simple library agnostic util functions for `css-in-js` styling solutions to make your design spacing consistent
 
 ## Install
 
 ```bash
-npm install my-package-name
+npm install spacing-util
 ```
 
-## Usage
+## Motivation
+
+---
+
+Not every single UI library has its own `theme` or if does it might lack of `spacing` system that might fit your needs.
+
+`spacing-util` is built in customizable way to allow you create your own spacing system which can work even if your library doesn't allow rewriting/extending their theme.
+
+&nbsp;
+
+## Features
+
+---
+
+&nbsp;
+
+## _Spacing_
+
+Spacing usage is mentioned to be mainly used for `padding` and `margin` properties. That's why it's usage is similar to CSS syntax - you can pass up to 4 properties which will be calculated by `parser` function.
+
+Passing argument different than `number` returns it **without** any transform.
+
+Default parser function multiplies given argument by `4` and returns as `px` unit.
+
+### Example usage
 
 ```ts
-import { myPackage } from 'my-package-name';
+import { spacing } from 'spacing-util';
 
-myPackage('hello');
-//=> 'hello from my package'
+spacing(1); // 4px
+spacing(5); // 20px
+spacing(5, 6); // 20px 24px
+spacing(5, 2, 1); // 20px 8px 4px
+spacing(5, 6, 1, 6); // 20px 24px 4px 24px
+
+spacing(2, '5em'); // 8px 5em
 ```
 
-## API
+### As inline style
 
-### myPackage(input, options?)
+```tsx
+import { spacing } from 'spacing-util';
 
-#### input
+const RandomBox = () => (
+  <div
+    style={{
+      padding: spacing(4, 8),
+      borderRadius: spacing(1),
+    }}
+  >
+    random box
+  </div>
+);
+```
 
-Type: `string`
+### With emotion
 
-Lorem ipsum.
+```tsx
+import { spacing } from 'spacing-util';
+import { css, cx } from '@emotion/css';
 
-#### options
+const RandomBox = () => (
+    <div
+    className={css`
+      padding: ${spacing(4, 8)};
+      border-radius: ${spacing(1)};
+    `}
+  >
+    random box
+  </div>
+```
 
-Type: `object`
+### With styled-components
 
-##### postfix
+```tsx
+import { spacing } from 'spacing-util';
+import styled from 'styled-components';
 
-Type: `string`
-Default: `rainbows`
+const StyledBox = styled.div`
+  padding: ${spacing(8)};
+  border-radius: ${spacing(1)};
+`;
 
-Lorem ipsum.
+const RandomBox = () => <StyledBox>random box</StyledBox>;
+```
 
-[build-img]:https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml/badge.svg
-[build-url]:https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml
-[downloads-img]:https://img.shields.io/npm/dt/typescript-npm-package-template
-[downloads-url]:https://www.npmtrends.com/typescript-npm-package-template
-[npm-img]:https://img.shields.io/npm/v/typescript-npm-package-template
-[npm-url]:https://www.npmjs.com/package/typescript-npm-package-template
-[issues-img]:https://img.shields.io/github/issues/ryansonshine/typescript-npm-package-template
-[issues-url]:https://github.com/ryansonshine/typescript-npm-package-template/issues
-[codecov-img]:https://codecov.io/gh/ryansonshine/typescript-npm-package-template/branch/main/graph/badge.svg
-[codecov-url]:https://codecov.io/gh/ryansonshine/typescript-npm-package-template
-[semantic-release-img]:https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
-[semantic-release-url]:https://github.com/semantic-release/semantic-release
-[commitizen-img]:https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
-[commitizen-url]:http://commitizen.github.io/cz-cli/
+&nbsp;
+
+## Spacing generator
+
+Sometimes the default parser function might not satisfy you or your design needs. That's why you can create your own `spacing` function. 
+
+You are not limited to just one spacing across the app. It's up to you what will be the names for your spacings :) 
+
+### Usage
+
+```ts
+import { generateSpacing } from 'spacing-util';
+import type { SpacingParser } from 'spacing-util';
+
+// Default parser function
+const parser: SpacingParser = value => `${~~(value * 4)}px`;
+
+const spacing = generateSpacing(parser);
+```
+
+[build-img]: https://github.com/EmilMalanczak/spacing-util/actions/workflows/release.yml/badge.svg
+[build-url]: https://github.com/EmilMalanczak/spacing-util/actions/workflows/release.yml
+[downloads-img]: https://img.shields.io/npm/dt/typescript-npm-package-template
+[downloads-url]: https://www.npmtrends.com/typescript-npm-package-template
+[npm-img]: https://img.shields.io/npm/v/typescript-npm-package-template
+[npm-url]: https://www.npmjs.com/package/typescript-npm-package-template
+[issues-img]: https://img.shields.io/github/issues/EmilMalanczak/spacing-util
+[issues-url]: https://github.com/EmilMalanczak/spacing-util/issues
+[codecov-img]: https://codecov.io/gh/EmilMalanczak/spacing-util/branch/main/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/EmilMalanczak/spacing-util
+[semantic-release-img]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[semantic-release-url]: https://github.com/semantic-release/semantic-release
+[commitizen-img]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
+[commitizen-url]: http://commitizen.github.io/cz-cli/
