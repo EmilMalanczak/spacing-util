@@ -116,7 +116,8 @@ import { generateSpacing } from 'spacing-util';
 import type { SpacingParser } from 'spacing-util';
 
 // Default parser function
-const parser: SpacingParser = value => `${~~(value * 4)}px`;
+const parser: SpacingParser = value =>
+  typeof value === 'number' ? `${~~(value * 4)}px` : value;
 
 const spacing = generateSpacing(parser);
 ```
@@ -160,7 +161,7 @@ Both shares same usage as `spacing` function with 1 extra option. Instead `numbe
 
 `top, right, bottom, left` are responsible for returning just for these specific direction meanwhile `x, y` are like a shortcut for `left + right` and `top + bottom` usage. Values given for given key later on are transformed with spacing `parser` function.
 
-*Note* -  if u will use `x` shorthand with `left` together, the order matters! The value at the bottom will ovveride the previous one - behavior just like in vanilla CSS
+_Note_ - if u will use `x` shorthand with `left` together, the order matters! The value at the bottom will ovveride the previous one - behavior just like in vanilla CSS
 
 ### Examples
 
@@ -187,7 +188,8 @@ import { generateMargin, generatePadding } from 'spacing-util';
 import type { SpacingParser } from 'spacing-util';
 
 // Default parser function
-const parser: SpacingParser = value => `${~~(value * 4)}px`;
+const parser: SpacingParser = value =>
+  typeof value === 'number' ? `${~~(value * 4)}px` : value;
 
 const margin = generateMargin(parser);
 const padding = generatePadding(parser);

@@ -2,7 +2,8 @@ import { SpacingParser } from '../types';
 import { generateSpacing } from './generateSpacing';
 
 describe('generateSpacing function', () => {
-  const testParser: SpacingParser = x => `${x + 2}px`;
+  const testParser: SpacingParser = x =>
+    typeof x === 'number' ? `${x + 2}px` : x;
 
   const spacing = generateSpacing(testParser);
 

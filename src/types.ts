@@ -1,6 +1,6 @@
 export type SpacingValue = string | number;
 
-export type SpacingParser = (value: number) => string;
+export type SpacingParser = (value: SpacingValue) => string;
 
 type _TupleOf<T, N extends number, R extends unknown[]> = R['length'] extends N
   ? R

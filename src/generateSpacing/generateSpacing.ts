@@ -4,10 +4,6 @@ export const generateSpacing: GenerateSpacing = parser => {
   const cache = new Map<SpacingValue, string>();
 
   const transform = (value: SpacingValue) => {
-    const isCustomProperty = typeof value !== 'number';
-
-    if (isCustomProperty) return value;
-
     // check if that value was already calculated
     // reduction of unnecessary calculations and memory use
     const cachedValue = cache.get(value);
@@ -17,7 +13,7 @@ export const generateSpacing: GenerateSpacing = parser => {
     }
 
     // we are sure its a number due to prev check
-    const valueToCache = parser(value as number);
+    const valueToCache = parser(value);
 
     // save result to save it for further use
     cache.set(value, valueToCache);
