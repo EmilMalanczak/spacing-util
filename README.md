@@ -103,7 +103,7 @@ const RandomBox = () => <StyledBox>random box</StyledBox>;
 
 &nbsp;
 
-## Spacing generator
+## _Spacing generator_
 
 Sometimes the default parser function might not satisfy you or your design needs. That's why you can create your own `spacing` function.
 
@@ -119,6 +119,78 @@ import type { SpacingParser } from 'spacing-util';
 const parser: SpacingParser = value => `${~~(value * 4)}px`;
 
 const spacing = generateSpacing(parser);
+```
+
+## _Padding and margin function_
+
+In case when you are lazy enough and feel bored of typing for example:
+
+```tsx
+const StyledBox = styled.div`
+  padding: ${spacing(8, 4)};
+  margin: ${spacing(5)};
+`;
+```
+
+There is a shorter way to do that by using `padding` and `margin` util functions.
+
+### Usage
+
+```tsx
+import { padding, margin } from 'spacing-util';
+
+const StyledBox = styled.div`
+  ${padding(8, 4)}
+  ${margin(5)}
+`;
+```
+
+Both shares same usage as `spacing` function with 1 extra option. Instead `number` or `string` input, you can an object of type:
+
+```ts
+{
+  x: number | string;
+  y: number | string;
+  top: number | string;
+  right: number | string;
+  bottom: number | string;
+  left: number | string;
+}
+```
+
+`top, right, bottom, left` are responsible for returning just for these specific direction meanwhile `x, y` are like a shortcut for `left + right` and `top + bottom` usage. Values given for given key later on are transformed with spacing `parser` function.
+
+*Note* -  if u will use `x` shorthand with `left` together, the order matters! The value at the bottom will ovveride the previous one - behavior just like in vanilla CSS
+
+### Examples
+
+```tsx
+padding({
+  x: 4,
+  top: 5,
+});
+
+// returns
+// padding-top: 20px;
+// padding-right: 20px;
+// padding-left: 20px;
+```
+
+## _Padding and margin generator_
+
+Since margin and padding are built on top of `spacing` function and you enjoy it's usage you are able to create your own `padding` and `margin` utils by passing a parser function to it's generator function.
+
+### Usage
+
+```ts
+import { generateMargin, generatePadding } from 'spacing-util';
+import type { SpacingParser } from 'spacing-util';
+
+// Default parser function
+const parser: SpacingParser = value => `${~~(value * 4)}px`;
+
+const margin = generateMargin(parser);
+const padding = generatePadding(parser);
 ```
 
 [build-img]: https://github.com/EmilMalanczak/spacing-util/actions/workflows/release.yml/badge.svg
