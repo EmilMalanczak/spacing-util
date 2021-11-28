@@ -2,7 +2,6 @@
 
 [![npm package][npm-img]][npm-url]
 [![Build Status][build-img]][build-url]
-[![Downloads][downloads-img]][downloads-url]
 [![Issues][issues-img]][issues-url]
 [![Code Coverage][codecov-img]][codecov-url]
 [![Commitizen Friendly][commitizen-img]][commitizen-url]
@@ -106,9 +105,9 @@ const RandomBox = () => <StyledBox>random box</StyledBox>;
 
 ## Spacing generator
 
-Sometimes the default parser function might not satisfy you or your design needs. That's why you can create your own `spacing` function. 
+Sometimes the default parser function might not satisfy you or your design needs. That's why you can create your own `spacing` function.
 
-You are not limited to just one spacing across the app. It's up to you what will be the names for your spacings :) 
+You are not limited to just one spacing across the app. It's up to you what will be the names for your spacings :)
 
 ### Usage
 
@@ -124,10 +123,8 @@ const spacing = generateSpacing(parser);
 
 [build-img]: https://github.com/EmilMalanczak/spacing-util/actions/workflows/release.yml/badge.svg
 [build-url]: https://github.com/EmilMalanczak/spacing-util/actions/workflows/release.yml
-[downloads-img]: https://img.shields.io/npm/dt/typescript-npm-package-template
-[downloads-url]: https://www.npmtrends.com/typescript-npm-package-template
-[npm-img]: https://img.shields.io/npm/v/typescript-npm-package-template
-[npm-url]: https://www.npmjs.com/package/typescript-npm-package-template
+[npm-img]: https://img.shields.io/npm/v/spacing-util
+[npm-url]: https://www.npmjs.com/package/spacing-util
 [issues-img]: https://img.shields.io/github/issues/EmilMalanczak/spacing-util
 [issues-url]: https://github.com/EmilMalanczak/spacing-util/issues
 [codecov-img]: https://codecov.io/gh/EmilMalanczak/spacing-util/branch/main/graph/badge.svg
