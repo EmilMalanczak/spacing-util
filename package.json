@@ -2,7 +2,8 @@
   "name": "spacing-util",
   "version": "0.0.0-development",
   "description": "Spacing util for css-in-js solutions",
-  "main": "./lib/src/index.js",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "files": [
     "lib/**/*"
   ],
